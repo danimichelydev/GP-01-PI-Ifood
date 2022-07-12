@@ -1,4 +1,4 @@
-# Gripo 01 - Projeto Integrador - Ifood
+# Grupo 01 - Projeto Integrador - Ifood
 
 Projeto Integrador do grupo 01 do curso de Backend do Ifood - Digital House
 
@@ -17,5 +17,5 @@ Projeto Integrador do grupo 01 do curso de Backend do Ifood - Digital House
 - Caio - 
 - Daniela - https://github.com/danimichelydev/
 - Genesis - 
-- Julissy - 
+- Julissy - https://github.com/julissy
 - Samuel - 
