@@ -2,20 +2,14 @@
 
 Projeto Integrador do grupo 01 do curso de Backend do Ifood - Digital House
 
-
-
 ### Screenshot
 
 ![](./screencapture.png)
 
-
-
-
-
 ## Autores
 
-- Caio - 
+- Caio - https://github.com/caiofsb
 - Daniela - https://github.com/danimichelydev/
-- Genesis - 
+- Genesis - https://github.com/g-101
 - Julissy - https://github.com/julissy
-- Samuel - 
+- Samuel -
