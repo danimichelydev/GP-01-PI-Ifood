@@ -1,0 +1,25 @@
+{
+  "name": "gp-01-pi-ifood",
+  "version": "1.0.0",
+  "description": "Projeto Integrador do grupo 01 do curso de Backend do Ifood - Digital House",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danimichelydev/GP-01-PI-Ifood.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danimichelydev/GP-01-PI-Ifood/issues"
+  },
+  "homepage": "https://github.com/danimichelydev/GP-01-PI-Ifood#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
+}
