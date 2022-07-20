@@ -1,9 +1,7 @@
 const Router = require('express');
-
+const userController = require('./app/controllers/UserControllers')
 const routes = new Router();
 
-routes.get('/', (req,res) => {
-    res.send('hello world')
-})
+routes.post('/users', userController.create);
 
 module.exports = routes;
