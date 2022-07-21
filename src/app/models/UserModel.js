@@ -5,6 +5,4 @@ function UserModel(id, nome, sobrenome, email, nascimento) {
     this.email = email   
 }
 
-
-
 module.exports = UserModel
