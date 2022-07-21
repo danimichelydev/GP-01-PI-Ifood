@@ -7,13 +7,15 @@ const userController = {
         const {
             nome,
             sobrenome,
-            email    
+            email,
+            nascimento    
         } = request.body
 
         const user = UserService.createUsers(
             nome,
             sobrenome,
-            email
+            email,
+            nascimento
         );
 
         if (!user.sucess) {
