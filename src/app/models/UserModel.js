@@ -13,6 +13,4 @@ function aniversario(nascimento) {
     return nascimentoFormatado
 }
 
-
-
 module.exports = UserModel
