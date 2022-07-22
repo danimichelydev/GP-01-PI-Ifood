@@ -1,4 +1,3 @@
-const { update } = require('../services/UserService');
 const UserService = require('../services/UserService')
 
 const userController = {
