@@ -4,5 +4,7 @@ const routes = new Router();
 
 routes.post("/users", userController.create);
 routes.get("/users", userController.list);
+routes.delete("/users/:id", userController.delete);
+
 
 module.exports = routes;
