@@ -23,12 +23,22 @@ const userController = {
         const list = UserService.list()
         response.json(list)
     },
+    update: (request, response) => {
+        const { id } = request.params
+        const {
+            nome,
+            sobrenome,
+            email    
+        } = request.body
+
+        const user = UserService.update(id, nome, sobrenome, email)
+       
+        return response.status(200).json(user.message)
+    },
     delete: (request, response) => {
         const { id } = request.params
         const user = UserService.delete(id)
-        if (!user.sucess) {
-            return response.status(400).json(user.message)
-        }
+        
         return response.status(200).json(user.message)
     }
 }
