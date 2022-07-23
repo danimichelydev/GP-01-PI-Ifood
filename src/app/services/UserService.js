@@ -20,6 +20,16 @@ const UserService = {
   list: () => {
     return listUsers;
   },
+  update: (id, nome, sobrenome, email) => {
+    const index = listUsers.findIndex((user) => user.id == id);
+    if (index === -1) {
+      return { message: "Usuário não encontrado"};
+    }
+    listUsers[index].nome = nome.toUpperCase();
+    listUsers[index].sobrenome = sobrenome.toUpperCase();
+    listUsers[index].email = email;
+    return { message: "Usuário atualizado com sucesso"}
+  },
   delete: (id) => {
     const index = listUsers.findIndex((user) => user.id == id);
     if (index === -1) {
