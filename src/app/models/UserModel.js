@@ -1,9 +1,9 @@
 function UserModel(id, nome, sobrenome, email, nascimento) {
     this.id = id,
-        this.nome = nome,
-        this.sobrenome = sobrenome,
-        this.email = email,
-        this.nascimento = aniversario(nascimento) // quando for testar no Insomnia passar no formato data US
+    this.nome = nome,
+    this.sobrenome = sobrenome,
+    this.email = email,
+    this.nascimento = aniversario(nascimento) // quando for testar no Insomnia passar no formato data US
 }
 
 function aniversario(nascimento) {
