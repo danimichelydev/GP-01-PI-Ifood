@@ -20,6 +20,7 @@
   "homepage": "https://github.com/danimichelydev/GP-01-PI-Ifood#readme",
   "dependencies": {
     "express": "^4.18.1",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "yup": "^0.32.11"
   }
 }
