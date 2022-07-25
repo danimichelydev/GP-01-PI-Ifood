@@ -9,7 +9,7 @@ function UserModel(id, nome, sobrenome, email, nascimento) {
 function aniversario(nascimento) {
 
     let data = new Date(nascimento)
-    let nascimentoFormatado = ((data.getDate())) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear();
+    let nascimentoFormatado = ((data.getDate())) + "/" + ((data.getMonth() + 1)) + "/" + (data.getFullYear());
     return nascimentoFormatado
 }
 
