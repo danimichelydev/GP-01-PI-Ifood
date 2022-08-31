@@ -1,7 +1,8 @@
 import { Sequelize } from "sequelize";
 import db from "../../db.js";
+import endereco from "../models/EnderecoModel.js"
 
-export default db.define("usuario", {
+const motel = db.define("moteis", {
     id: {
         type: Sequelize.INTEGER.UNSIGNED,
         primaryKey: true,
@@ -17,16 +18,24 @@ export default db.define("usuario", {
         allowNull: false,
         unique: true,
     },
-    cpf: {
-        type: Sequelize.STRING(15),
-        allowNull: false,
-    },
-    dataNascimento: {
-        type: Sequelize.DATEONLY,
+    cnpj: {
+        type: Sequelize.STRING(18),
         allowNull: false,
     },
     senha: {
         type: Sequelize.STRING(6),
         allowNull: false,
-    }
+    },
 });
+
+    motel.hasOne(endereco, {
+        foreignKey: "idMotel",
+        as: "endereco"
+    });
+
+    endereco.belongsTo(motel, {
+        foreignKey: "idMotel",
+        as: 'motel'
+    })
+
+export default motel;

@@ -1,4 +1,6 @@
-const yup = require('yup')
+//const yup = require('yup')
+
+import yup from 'yup';
 
 function validatorUsers(request, response, next) {
     const schema = yup.object().shape({
@@ -14,4 +16,5 @@ function validatorUsers(request, response, next) {
     next()
 }
 
-module.exports = validatorUsers;
+export default validatorUsers;
+//module.exports = validatorUsers;
