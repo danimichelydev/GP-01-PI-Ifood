@@ -1,4 +1,5 @@
-const UserModel = require("../models/UserModel");
+//const UserModel = require("../models/UserModel");
+import UserModel from "../models/UserModel.js";
 
 let listUsers = []// criacao de ID sequencial, usar no list
 
@@ -53,4 +54,6 @@ const UserService = {
     }
   }
 }
-module.exports = UserService;
+
+export default UserService;
+//module.exports = UserService;

@@ -1,32 +1,33 @@
 import { Sequelize } from "sequelize";
 import db from "../../db.js";
+import motel from "./MotelModel.js";
 
-export default db.define("usuario", {
+const endereco = db.define("endereco", {
     id: {
         type: Sequelize.INTEGER.UNSIGNED,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
     },
-    nome: {
+    rua: {
         type: Sequelize.STRING(50),
         allowNull: false,
     },
-    email: {
-        type: Sequelize.STRING(150),
-        allowNull: false,
-        unique: true,
-    },
-    cpf: {
-        type: Sequelize.STRING(15),
+    numero: {
+        type: Sequelize.STRING(10),
         allowNull: false,
     },
-    dataNascimento: {
-        type: Sequelize.DATEONLY,
+    bairro: {
+        type: Sequelize.STRING(50),
         allowNull: false,
     },
-    senha: {
-        type: Sequelize.STRING(6),
+    cidade: {
+        type: Sequelize.STRING(50),
         allowNull: false,
-    }
+    },
+    cep: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+    },
 });
+export default endereco;
