@@ -1,5 +1,3 @@
-//const yup = require('yup')
-
 import yup from 'yup';
 
 function validatorUsers(request, response, next) {

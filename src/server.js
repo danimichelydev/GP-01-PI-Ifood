@@ -1,7 +1,4 @@
-//const app = require("./app");
+import "dotenv/config";
 import app from "./app.js";
-import db from "../src/db.js";
 
-db.sync(() => console.log(`Banco de dados conectado: ${process.env.DB_NAME}`));
-
-app.listen(3000);
+app.listen(process.env.API_PORT);

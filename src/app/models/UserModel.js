@@ -1,7 +1,12 @@
-import { Sequelize } from "sequelize";
-import db from "../../db.js";
+// formato de criação do model
 
-export default db.define("usuario", {
+import Sequelize, { Model } from "sequelize";
+import databaseConfig from "../../config/database.js";
+const sequelize = new Sequelize(databaseConfig);
+
+class UsuarioModel extends Model { }
+
+UsuarioModel.init({
     id: {
         type: Sequelize.INTEGER.UNSIGNED,
         primaryKey: true,
@@ -29,4 +34,12 @@ export default db.define("usuario", {
         type: Sequelize.STRING(6),
         allowNull: false,
     }
-});
+    },
+    {
+        sequelize,
+        modelName: "Usuarios",
+        timestamps: false,
+        underscored: true,
+    });
+
+export default UsuarioModel;
