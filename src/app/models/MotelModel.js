@@ -1,8 +1,12 @@
-import { Sequelize } from "sequelize";
-import db from "../../db.js";
-import endereco from "../models/EnderecoModel.js"
+import Sequelize, { Model } from "sequelize";
+import databaseConfig from "../../config/database.js";
+import EnderecoModel from "../models/EnderecoModel.js";
 
-const motel = db.define("moteis", {
+const sequelize = new Sequelize(databaseConfig);
+
+class MotelModel extends Model { }
+
+MotelModel.init({
     id: {
         type: Sequelize.INTEGER.UNSIGNED,
         primaryKey: true,
@@ -24,18 +28,14 @@ const motel = db.define("moteis", {
     },
     senha: {
         type: Sequelize.STRING(6),
-        allowNull: false,
-    },
-});
-
-    motel.hasOne(endereco, {
-        foreignKey: "idMotel",
-        as: "endereco"
+        allowNull: false
+    }
+},
+    {
+        sequelize,
+        modelName: "Moteis",
+        timestamps: false,
+        underscored: true,
     });
 
-    endereco.belongsTo(motel, {
-        foreignKey: "idMotel",
-        as: 'motel'
-    })
-
-export default motel;
+export default MotelModel;
