@@ -1,12 +1,12 @@
-// formato de criação do model
-
 import Sequelize, { Model } from "sequelize";
 import databaseConfig from "../../config/database.js";
+import EnderecoModel from "../models/EnderecoModel.js";
+
 const sequelize = new Sequelize(databaseConfig);
 
-class UsuarioModel extends Model { }
+class MotelModel extends Model { }
 
-UsuarioModel.init({
+MotelModel.init({
     id: {
         type: Sequelize.INTEGER.UNSIGNED,
         primaryKey: true,
@@ -22,24 +22,20 @@ UsuarioModel.init({
         allowNull: false,
         unique: true,
     },
-    cpf: {
-        type: Sequelize.STRING(15),
-        allowNull: false,
-    },
-    dataNascimento: {
-        type: Sequelize.DATEONLY,
+    cnpj: {
+        type: Sequelize.STRING(18),
         allowNull: false,
     },
     senha: {
         type: Sequelize.STRING(6),
-        allowNull: false,
+        allowNull: false
     }
-    },
+},
     {
         sequelize,
-        modelName: "Usuarios",
+        modelName: "Moteis",
         timestamps: false,
         underscored: true,
     });
 
-export default UsuarioModel;
+export default MotelModel;

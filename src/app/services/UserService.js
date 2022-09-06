@@ -1,14 +1,16 @@
-const UserModel = require("../models/UserModel");
+//const UserModel = require("../models/UserModel");
+import UserModel from "../models/UserModel.js";
 
-let listUsers = [];
+let listUsers = []// criacao de ID sequencial, usar no list
 
 const UserService = {
-  createUsers: (nome, sobrenome, email) => {
+  createUsers: (nome, sobrenome, email, nascimento) => {
     const newUser = new UserModel(
-      (id = listUsers.length + 1),
+      listUsers.length + 1,
       nome.toUpperCase(),
       sobrenome.toUpperCase(),
-      email
+      email,
+      nascimento
     );
 
     listUsers.push(newUser);
@@ -20,5 +22,38 @@ const UserService = {
   list: () => {
     return listUsers;
   },
-};
-module.exports = UserService;
+  update: (id, nome, sobrenome, email, nascimento) => {
+    const index = listUsers.findIndex((user) => user.id == id);
+    if (index === -1) {
+      return {
+        sucess: false,
+        message: "Usuário não encontrado"
+      };
+    }
+    listUsers[index].nome = nome.toUpperCase();
+    listUsers[index].sobrenome = sobrenome.toUpperCase();
+    listUsers[index].email = email;
+    listUsers[index].nascimento = nascimento
+    return {
+      sucess: true,
+      message: "Usuário atualizado com sucesso"
+    }
+  },
+  delete: (id) => {
+    const index = listUsers.findIndex((user) => user.id == id);
+    if (index === -1) {
+      return {
+        sucess: false,
+        message: "Usuário não encontrado"
+      };
+    }
+    listUsers.splice(index, 1);
+    return {
+      sucess: true,
+      message: "Usuário deletado com sucesso"
+    }
+  }
+}
+
+export default UserService;
+//module.exports = UserService;

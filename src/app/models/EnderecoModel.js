@@ -1,45 +1,45 @@
-// formato de criação do model
-
 import Sequelize, { Model } from "sequelize";
 import databaseConfig from "../../config/database.js";
+import MotelModel from "./MotelModel.js";
+
 const sequelize = new Sequelize(databaseConfig);
 
-class UsuarioModel extends Model { }
+class EnderecoModel extends Model { }
 
-UsuarioModel.init({
+EnderecoModel.init({
     id: {
         type: Sequelize.INTEGER.UNSIGNED,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
     },
-    nome: {
+    rua: {
         type: Sequelize.STRING(50),
         allowNull: false,
     },
-    email: {
-        type: Sequelize.STRING(150),
-        allowNull: false,
-        unique: true,
-    },
-    cpf: {
-        type: Sequelize.STRING(15),
+    numero: {
+        type: Sequelize.STRING(10),
         allowNull: false,
     },
-    dataNascimento: {
-        type: Sequelize.DATEONLY,
+    bairro: {
+        type: Sequelize.STRING(50),
         allowNull: false,
     },
-    senha: {
-        type: Sequelize.STRING(6),
+    cidade: {
+        type: Sequelize.STRING(50),
         allowNull: false,
-    }
     },
+    cep: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+    },
+},
     {
         sequelize,
-        modelName: "Usuarios",
+        modelName: "Enderecos",
         timestamps: false,
-        underscored: true,
-    });
+        underscored: true
+    }
+);
 
-export default UsuarioModel;
+export default EnderecoModel;
