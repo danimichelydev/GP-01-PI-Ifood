@@ -12,16 +12,8 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false
       },
-      email: {
-        type: Sequelize.STRING(150),
-        allowNull: false
-      },
       cnpj: {
         type: Sequelize.STRING(18),
-        allowNull: false
-      },
-      senha: {
-        type: Sequelize.STRING(6),
         allowNull: false
       }
     });
