@@ -1,5 +1,6 @@
 import Router from "express";
 
+
 import validatorUsers from './middlewares/ValidatorUser.js';
 import CreateAndDeleteUserController from "./app/controllers/User/CreateAndDeleteUserController.js";
 import UpdateUserController from "./app/controllers/User/UpdateUserController.js";
@@ -17,6 +18,7 @@ const createAndDeleteUserController = new CreateAndDeleteUserController();
 const updateUserController = new UpdateUserController();
 const listUserController = new ListUserController();
 
+
 routes.post("/session", (req, res) => SessionController.create(req, res));
 routes.post("/users", validatorUsers, (req, res) => createAndDeleteUserController.addUsuario(req, res));
 routes.get("/users", (req,res) => listUserController.listarUsuarios(req, res));
@@ -33,6 +35,5 @@ routes.post("/moteis", validatorMotel, (req, res) => createAndDeleteMotelControl
 routes.get("/moteis", (req, res) => listMotelController.listarMoteis(req, res));
 routes.put("/moteis/:id", (req, res) => updateMotelController.atualizaMotel(req,res));
 routes.delete("/moteis/:id", (req,res) => createAndDeleteMotelController.deletaMotel(req, res));
-
 
 export { routes as default };
