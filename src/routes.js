@@ -1,5 +1,6 @@
 import Router from "express";
 
+
 import validatorUsers from './middlewares/ValidatorUser.js';
 import CreateAndDeleteUserController from "./app/controllers/User/CreateAndDeleteUserController.js";
 import UpdateUserController from "./app/controllers/User/UpdateUserController.js";
