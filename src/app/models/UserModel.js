@@ -31,7 +31,7 @@ UsuarioModel.init({
         allowNull: false,
     },
     senha: {
-        type: Sequelize.STRING(6),
+        type: Sequelize.STRING,
         allowNull: false,
     }
     },

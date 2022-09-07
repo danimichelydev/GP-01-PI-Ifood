@@ -1,6 +1,4 @@
 'use strict';
-
-//criação de migrations via cli 
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Enderecos', {
