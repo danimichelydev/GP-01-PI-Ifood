@@ -2,10 +2,10 @@ import UsuarioModel from "../../models/UserModel";
 import HashPassword from "../../utils/HashPassword";
 
 export default class CreateAndDeleteUserService {
-    constructor() { }
+  constructor() { }
 
   async create(nome, email, cpf, dataNascimento, senha) {
-    
+
     const hashedPassword = HashPassword.hash(senha);
 
     try {
@@ -13,7 +13,7 @@ export default class CreateAndDeleteUserService {
         nome, email, cpf, dataNascimento, senha: hashedPassword
       });
 
-      return novoUsuario
+      return ([novoUsuario.id, novoUsuario.nome, novoUsuario.email])
     } catch (error) {
       return { erro: error.message };
     }
@@ -28,7 +28,7 @@ export default class CreateAndDeleteUserService {
       }
 
       const usuarioDeletado = await usuario.destroy();
-      return {message: 'Usuário deletado com sucesso!'};
+      return { message: 'Usuário deletado com sucesso!' };
     } catch (error) {
       return { erro: error.message }
     }

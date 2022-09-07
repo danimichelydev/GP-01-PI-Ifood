@@ -3,7 +3,7 @@ import UsuarioModel from "../../models/UserModel";
 export default class ListUserService {
     async listAll() {
         try {
-            const usuarios = await UsuarioModel.findAll();
+            const usuarios = await UsuarioModel.findAll({attributes: ['id', 'nome', 'email']});
             return usuarios;
         } catch (error) {
             return { erro: error.message };
@@ -23,4 +23,5 @@ export default class ListUserService {
             return { erro: error.message };
         }
     }
-}
+};
+

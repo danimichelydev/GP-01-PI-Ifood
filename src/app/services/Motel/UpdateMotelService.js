@@ -18,9 +18,9 @@ export default class UpdateMotelService {
             let [motelAlterado] = await MotelModel.update(novasInfos, {
                 where: { id: Number(id) }
             });
-            endereco.id = motelAlterado.id;
+            endereco.idMotel = motelAlterado.id
             let [enderecoAlterado] = await EnderecoModel.update(endereco, {
-                where: { id: Number(id) }
+                where: { idMotel: Number(id) }
             });
 
             if (enderecoAlterado === 1 || motelAlterado === 1) {
