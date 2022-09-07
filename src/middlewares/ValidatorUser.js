@@ -1,18 +1,19 @@
-import yup from 'yup';
+import * as yup from 'yup';
 
-function validatorUsers(request, response, next) {
+export default async function validatorUsers(request, response, next) {
     const schema = yup.object().shape({
-        nome: yup.string().strict().required().min(3),
-        sobrenome: yup.string().strict().required().min(3),
-        email: yup.string().email(),
-        nascimento: yup.string().strict().min(10)
+        nome: yup.string().strict().required("Nome é obrigatório").min(3),
+        email: yup.string().email().required("Email é obrigatório"),
+        cpf: yup.string().strict().required("Cpf é obrigatório"),
+        dataNascimento: yup.string().strict().min(10),
+        senha: yup.string().strict().min(6)
     })
-    if(!schema.isValidSync(request.body)) {
-        return response.status(400).json({ error: "Verifique os campos obrigatórios"})
-    }
 
-    next()
+    await schema.validate(request.body).catch((err) => {
+        console.log(err)
+        return response.status(400).json({
+      error: err.errors
+    });
+  });
+  next();
 }
-
-export default validatorUsers;
-//module.exports = validatorUsers;
