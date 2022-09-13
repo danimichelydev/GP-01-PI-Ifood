@@ -26,7 +26,7 @@ Curso de back-end com Node Js ofertado pelo Ifood ministrado pela Digital House 
 ## Algumas ferramentas
 
 - **Documento de Requisitos** entregue na primeira sprint como base
-- **GitHub** com merge na main via pullrequest com aprovação
+- **GitHub** com merge na main via pull request com aprovação
 - **Trello** com cards estruturados para orientação das atividades
 - **Consulta a Documentações** das bibliotecas e ferramentas 
 - **VS Code** como editor de código
