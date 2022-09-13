@@ -51,7 +51,7 @@ Curso de back-end com Node Js ofertado pelo Ifood ministrado pela Digital House 
 - [Caio Santos](https://github.com/caiofsb) 
 - [Dani Michely](https://github.com/danimichelydev/)
 - [Genesis Lima](https://github.com/g-101)
-- [Julissy Tocachelo](https://github.com/g-101)
+- [Julissy Tocachelo](https://github.com/julissy)
 
 
 
