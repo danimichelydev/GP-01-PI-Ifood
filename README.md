@@ -17,7 +17,7 @@ ter quarto disponível.
 
 ## Sobre o curso
 
-Curso de back-end com Node Js ofertado pelo Ifood ministrado pela Digital House em parceria com a Patência Tech.
+Curso de back-end com Node Js ofertado pelo Ifood ministrado pela Digital House em parceria com a Potência Tech.
 
 <img src="./public/img/ifood.png" style="zoom:50%;" />      <img src="./public/img/dh.png" style="zoom:50%;" />          <img src="./public/img/pt.png" style="zoom:50%;" />   
 
