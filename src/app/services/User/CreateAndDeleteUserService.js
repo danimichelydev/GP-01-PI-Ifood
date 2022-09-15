@@ -9,6 +9,18 @@ export default class CreateAndDeleteUserService {
     const hashedPassword = HashPassword.hash(senha);
 
     try {
+      let usuarioExiste = await UsuarioModel.findOne({
+        where: { email: email },
+      });
+      if (usuarioExiste) {
+        return { erro: 'Usuario já existe!' };
+      }
+      usuarioExiste = await UsuarioModel.findOne({
+        where: { cpf: cpf },
+      });
+      if (usuarioExiste) {
+        return { erro: 'Usuario já existe!' };
+      }
       const novoUsuario = await UsuarioModel.create({
         nome, email, cpf, dataNascimento, senha: hashedPassword
       });

@@ -10,7 +10,7 @@ export default class CreateAndDeleteUserController {
     const idade =
       new Date().getFullYear() - new Date(dataNascimento).getFullYear();
     if (idade < 18) {
-      return res.status(400).send({ erro: 'Menor de idade.' });
+      return response.status(400).send({ erro: 'Menor de idade.' });
     }
     const novoUsuarioCriado = await this.service.create(
       nome,
