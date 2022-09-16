@@ -10,7 +10,7 @@ export default class CreateAndDeleteMotelService {
             let novoMotel = await MotelModel.create(motel);
             endereco.idMotel = novoMotel.id;
             await EnderecoModel.create(endereco);
-            return { messagem: 'Motel criado com sucesso!' };
+            return ([novoMotel, endereco]);
         } catch (error) {
             return { erro: error.message };
         }

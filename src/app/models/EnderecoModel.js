@@ -1,6 +1,5 @@
 import Sequelize, { Model } from "sequelize";
 import databaseConfig from "../../config/database.js";
-import MotelModel from "./MotelModel.js";
 
 const sequelize = new Sequelize(databaseConfig);
 

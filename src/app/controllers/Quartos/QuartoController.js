@@ -1,17 +1,21 @@
-import QuartoRepository from '../models/ModelQuartos.js';
+import QuartoRepository from '../../models/ModelQuartos.js';
 
-class QuartoController {
-  static async listarQuartos(req, res) {
+export default class QuartoController {
+  async listarQuartos(req, res) {
+    const { idMotel } = req.params;
     try {
-      const todosQuartos = await QuartoRepository.findAll();
+      const todosQuartos = await QuartoRepository.findAll({
+        where: { id: Number(idMotel) }
+      });
       return res.status(200).json(todosQuartos);
     } catch (error) {
+      console.log(error)
       return res.status(400).json(error.message);
     }
   }
 
   // listar um quarto
-  static async listaUmQuarto(req, res) {
+  async listaUmQuarto(req, res) {
     const { id } = req.params;
     try {
       const umQuarto = await MotelRepository.findOne({
@@ -23,7 +27,7 @@ class QuartoController {
   }
 
   // adiciona um quarto
-  static async addQuarto(req, res) {
+  async addQuarto(req, res) {
     try {
       let dadosQuarto = req.body;
       let quarto = await QuartoRepository.create(dadosQuarto);
@@ -34,7 +38,7 @@ class QuartoController {
   }
 
   // atualiza um quarto
-  static async atualizaQuarto(req, res) {
+  async atualizaQuarto(req, res) {
     const { id } = req.params;
     const novasInfos = req.body;
     try {
@@ -49,7 +53,7 @@ class QuartoController {
   }
 
   // deleta um quarto
-  static async deletaQuarto(req, res) {
+  async deletaQuarto(req, res) {
     const { id } = req.params;
     try {
       await QuartoRepository.destroy({ where: { id: Number(id) } });
@@ -58,6 +62,6 @@ class QuartoController {
       return res.status(400).json(error.message);
     }
   }
-}
+};
 
-export default QuartoController;
+

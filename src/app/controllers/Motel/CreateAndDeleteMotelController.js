@@ -1,7 +1,4 @@
-import MotelModel from "../../models/MotelModel";
-import EnderecoModel from "../../models/EnderecoModel";
 import CreateAndDeleteMotelService from "../../services/Motel/CreateAndDeleteMotelService";
-import { response } from "express";
 
 export default class CreateAndDeleteMotelController {
     constructor() {

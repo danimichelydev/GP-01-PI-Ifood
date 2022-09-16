@@ -5,7 +5,7 @@ import CreateAndDeleteUserController from "./app/controllers/User/CreateAndDelet
 import UpdateUserController from "./app/controllers/User/UpdateUserController.js";
 import ListUserController from "./app/controllers/User/ListUserController.js";
 import SessionController from "./app/controllers/auth/SessionController.js";
-
+import QuartoController from "./app/controllers/Quartos/QuartoController"
 import validatorMotel from "./middlewares/ValidatorMotel.js";
 import CreateAndDeleteMotelController from "./app/controllers/Motel/CreateAndDeleteMotelController.js";
 import UpdateMotelController from "./app/controllers/Motel/UpdateMotelController.js";
@@ -17,9 +17,12 @@ const createAndDeleteUserController = new CreateAndDeleteUserController();
 const updateUserController = new UpdateUserController();
 const listUserController = new ListUserController();
 
-//routes.post("/session", (req, res) => SessionController.create(req, res));
+routes.post("/session", (req, res) => SessionController.create(req, res));
 
-//routes.use(validateSessionToken);
+routes.get("/moteis/search", (req,res) => listMotelController.listaUmMotel(req, res));
+routes.get("/moteis", (req, res) => listMotelController.listarMoteis(req, res));
+
+routes.use(validateSessionToken);
 
 routes.post("/users", validatorUsers, (req, res) => createAndDeleteUserController.addUsuario(req, res));
 routes.get("/users", (req,res) => listUserController.listarUsuarios(req, res));
@@ -29,11 +32,15 @@ routes.delete("/users/:id", (req, res) => createAndDeleteUserController.deletaUs
 const createAndDeleteMotelController = new CreateAndDeleteMotelController();
 const updateMotelController = new UpdateMotelController();
 const listMotelController = new ListMotelController();
+const quartoController = new QuartoController();
 
-routes.get("/moteis/search", (req,res) => listMotelController.listaUmMotel(req, res));
-routes.post("/moteis", validatorMotel, (req, res) => createAndDeleteMotelController.addMotel(req,res));
-routes.get("/moteis", (req, res) => listMotelController.listarMoteis(req, res));
+routes.post("/moteis", (req, res) => createAndDeleteMotelController.addMotel(req,res));
 routes.put("/moteis/:id", (req, res) => updateMotelController.atualizaMotel(req,res));
 routes.delete("/moteis/:id", (req,res) => createAndDeleteMotelController.deletaMotel(req, res));
+
+routes.get("/motel/:idMotel/quartos", (req, res) => quartoController.listarQuartos(req,res));
+routes.post("/motel/quarto", (req, res) => quartoController.addQuarto(req,res));
+routes.get("/motel/quartos/:id", (req, res) => quartoController.listaUmQuarto(res, req));
+
 
 export { routes as default };

@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      nome: {
+        type: Sequelize.STRING(50),
+        allowNull: false
+      },
       valor_quarto: {
         type: Sequelize.FLOAT,
         allowNull: false,
@@ -16,6 +20,12 @@ module.exports = {
       acessorios_quarto: {
         type: Sequelize.ENUM({
           values: ['s', 'p', 'i'],
+        }),
+        allowNull: false,
+      },
+      status_quarto: {
+        type: Sequelize.ENUM({
+          values: ['disponivel', 'indisponivel']
         }),
         allowNull: false,
       },
