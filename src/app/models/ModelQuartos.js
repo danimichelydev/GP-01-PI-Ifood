@@ -1,8 +1,10 @@
 'use strict';
-const { Model } = require('sequelize');
+import Sequelize, { Model } from "sequelize";
+import databaseConfig from "../../config/database.js";
+
 const sequelize = new Sequelize(databaseConfig);
 
-class QuartosModel extends Model {}
+class QuartosModel extends Model { }
 
 QuartosModel.init(
   {
@@ -12,21 +14,32 @@ QuartosModel.init(
       autoIncrement: true,
       allowNull: false,
     },
+    nome: {
+      type: Sequelize.STRING(50),
+      allowNull: false,
+    },
     valor_quarto: {
-      type: DataTypes.FLOAT,
+      type: Sequelize.FLOAT,
       allowNull: false,
     },
     acessorios_quarto: {
-      type: DataTypes.ENUM({
+      type: Sequelize.ENUM({
         values: ['s', 'p', 'i'],
       }),
       allowNull: false,
+    },
+    status_quarto: {
+      type: Sequelize.ENUM({
+        values: ['disponivel', 'indisponivel']
+      })
     },
   },
 
   {
     sequelize,
     modelName: 'Quartos',
+    timestamps: false,
+    underscored: true,
   }
 );
 
