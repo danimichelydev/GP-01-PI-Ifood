@@ -9,11 +9,14 @@ export default async function validatorUsers(request, response, next) {
         senha: yup.string().strict().min(6)
     })
 
-    await schema.validate(request.body).catch((err) => {
+    try {
+        await schema.validate(request.body);
+        next();
+    } catch (err) {
         console.log(err)
         return response.status(400).json({
-      error: err.errors
-    });
-  });
-  next();
+            error: err.errors
+        });
+    }
 }
+  

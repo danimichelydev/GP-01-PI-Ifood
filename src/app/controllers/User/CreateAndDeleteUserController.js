@@ -10,7 +10,7 @@ export default class CreateAndDeleteUserController {
     const idade =
       new Date().getFullYear() - new Date(dataNascimento).getFullYear();
     if (idade < 18) {
-      return res.status(400).send({ erro: 'Menor de idade.' });
+      return response.status(400).send({ erro: 'Menor de idade.' });
     }
     const novoUsuarioCriado = await this.service.create(
       nome,
@@ -20,13 +20,18 @@ export default class CreateAndDeleteUserController {
       senha
     );
 
-    return response.json(novoUsuarioCriado);
+    if (novoUsuarioCriado.erro) {
+      return response.status(400).json(novoUsuarioCriado);
+    }
+    return response.status(201).json(novoUsuarioCriado);
   }
 
   async deletaUsuario(request, response) {
     const { id } = request.params;
     const resultado = await this.service.delete(id);
-
-    response.json({ messagem: 'Usuario deletado com sucesso!' });
+    if (resultado.sucess == false) {
+      return response.status(400).json(resultado);
+    }
+    return response.status(200).json(resultado);
   }
 }

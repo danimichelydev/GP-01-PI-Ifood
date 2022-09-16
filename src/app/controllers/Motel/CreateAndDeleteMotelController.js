@@ -9,12 +9,18 @@ export default class CreateAndDeleteMotelController {
         let endereco = request.body.endereco;
         let motel = await this.service.create(request.body);
 
-        return response.json(motel);
+        if (motel.erro) {
+            return response.status(400).json(motel);
+        }
+        return response.status(201).json(motel);
     }
 
     async deletaMotel(request, response) {
         const { id } = request.params;
         const resultado = await this.service.delete(id);
-        return response.json("Motel deletado com sucesso!")
+        if (resultado.sucess==false) {
+            return response.status(400).json(resultado);
+        }
+        return response.status(200).json(resultado);
     }
 }

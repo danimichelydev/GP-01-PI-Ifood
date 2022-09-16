@@ -7,6 +7,12 @@ export default class CreateAndDeleteMotelService {
     async create(motel) {
         try {
             let { endereco } = motel;
+            let motelExiste = await MotelModel.findOne({
+                where: { cnpj: motel.cnpj },
+            });
+            if (motelExiste) {
+                return { erro: 'Motel já existe!' };
+            }
             let novoMotel = await MotelModel.create(motel);
             endereco.idMotel = novoMotel.id;
             await EnderecoModel.create(endereco);
