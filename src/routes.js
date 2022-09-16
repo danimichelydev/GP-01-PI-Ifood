@@ -21,10 +21,11 @@ routes.post("/session", (req, res) => SessionController.create(req, res));
 
 routes.get("/moteis/search", (req,res) => listMotelController.listaUmMotel(req, res));
 routes.get("/moteis", (req, res) => listMotelController.listarMoteis(req, res));
+routes.post("/users", validatorUsers, (req, res) => createAndDeleteUserController.addUsuario(req, res));
 
 routes.use(validateSessionToken);
+//apos essa rota tudo precisa ser feito apos o login e uso do token
 
-routes.post("/users", validatorUsers, (req, res) => createAndDeleteUserController.addUsuario(req, res));
 routes.get("/users", (req,res) => listUserController.listarUsuarios(req, res));
 routes.put("/users/:id", (req, res) => updateUserController.atualizaUsuario(req, res));
 routes.delete("/users/:id", (req, res) => createAndDeleteUserController.deletaUsuario(req, res));
@@ -34,7 +35,7 @@ const updateMotelController = new UpdateMotelController();
 const listMotelController = new ListMotelController();
 const quartoController = new QuartoController();
 
-routes.post("/moteis", (req, res) => createAndDeleteMotelController.addMotel(req,res));
+routes.post("/moteis", validatorMotel, (req, res) => createAndDeleteMotelController.addMotel(req,res));
 routes.put("/moteis/:id", (req, res) => updateMotelController.atualizaMotel(req,res));
 routes.delete("/moteis/:id", (req,res) => createAndDeleteMotelController.deletaMotel(req, res));
 
