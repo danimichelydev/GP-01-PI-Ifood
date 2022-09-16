@@ -13,9 +13,14 @@ import ListMotelController from "./app/controllers/Motel/ListMotelController.js"
 import validateSessionToken from "./middlewares/ValidatorSessionToken.js";
 const routes = new Router();
 
+import swagger from "swagger-ui-express";
+import swaggerJson from "./docs/swagger.json"
+
 const createAndDeleteUserController = new CreateAndDeleteUserController();
 const updateUserController = new UpdateUserController();
 const listUserController = new ListUserController();
+
+routes.use('/docs', swagger.serve, swagger.setup(swaggerJson))
 
 routes.post("/session", (req, res) => SessionController.create(req, res));
 

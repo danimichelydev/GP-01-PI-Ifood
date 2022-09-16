@@ -26,6 +26,7 @@
     "nodemon": "^2.0.19",
     "path": "^0.12.7",
     "sequelize": "^6.21.4",
+    "swagger-ui-express": "^4.5.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
