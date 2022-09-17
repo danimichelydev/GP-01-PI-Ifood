@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Quartos', {
@@ -31,7 +29,7 @@ module.exports = {
       },
       //
       // para relacoes colocar tipo, on delete(pra deleter quando a relação for deletada)
-      id_Motel: {
+      id_motel: {
         type: Sequelize.INTEGER,
         allowNull: false,
         onDelete: 'CASCADE',

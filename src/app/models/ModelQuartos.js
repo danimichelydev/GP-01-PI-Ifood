@@ -1,4 +1,3 @@
-'use strict';
 import Sequelize, { Model } from "sequelize";
 import databaseConfig from "../../config/database.js";
 

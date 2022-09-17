@@ -5,7 +5,7 @@ export default class QuartoController {
     const { idMotel } = req.params;
     try {
       const todosQuartos = await QuartoRepository.findAll({
-        where: { id: Number(idMotel) }
+        where: { idMotel: Number(idMotel) }
       });
       return res.status(200).json(todosQuartos);
     } catch (error) {
@@ -31,7 +31,7 @@ export default class QuartoController {
     try {
       let dadosQuarto = req.body;
       let quarto = await QuartoRepository.create(dadosQuarto);
-      res.status(200).json({ messagem: 'Quarto criado com sucesso!' });
+      res.status(200).json(quarto);
     } catch (error) {
       return res.status(400).json(error.message);
     }

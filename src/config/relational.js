@@ -18,7 +18,9 @@ function relacoes () {
         onDelete: "CASCADE"
     });
 
-    QuartosModel.belongsTo(MotelModel);
+    QuartosModel.belongsTo(MotelModel, {
+        foreignKey: "idMotel"
+    });
 }
 
 export default { relacoes };
