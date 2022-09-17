@@ -1,0 +1,14 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Easy Motel - Sistema de Buscas",
+    "description": "O EASY MOTEL é um sistema usado para consulta de disponibilidade de quartos nos Motéis e reservas com base numa cadeia de estabelecimentos cadastrados no sistema.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "description": "Localhost",
+      "url": "http://localhost:3000"
+    }
+  ]
+}
