@@ -19,7 +19,6 @@ export default class ListMotelController {
     }
     async listaMoteisPorBairro(request, response) {
         const { nome } = request.query;
-        console.log('QUERY: ', nome);
         const moteis = await this.service.listAllByBairro(nome);
         return response.json(moteis);
     }
