@@ -10,5 +10,211 @@
       "description": "Localhost",
       "url": "http://localhost:3000"
     }
-  ]
+  ],
+  "paths": {
+    "/session": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Realizar login na API",
+        "description": "Esta rota é responsável por gerar um token JWT para visualização de rotas protegidas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/session-request"},
+              "examples": {
+                "session-sucess": {
+                  "value": {
+                    "email": "email@example.com",
+                    "senha": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/session-response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos / Usuário não encontrado",
+            "content": {
+              "application/json": {
+                "value": {
+                  "error": { "type": "string"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Usuários"],
+        "security": [{ "bearerAuth": [] }],
+        "summary": "Lista todos os usuários",
+        "description": "Esta rota é responsável por listar todos os usuários cadastrados no sistema.",
+        "responses": {
+          "200": {
+            "description": "Listar os usuários cadastrados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/user-response" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Usuários"],
+        "summary": "Cadastra um novo usuário",
+        "description": "Esta rota é responsável por cadastrar um novo usuário",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref" : "#/components/schemas/user-request"},
+              "examples": {
+                "user-sucess": {
+                  "value": {
+                    "nome": "Bob Esponja",
+                    "email": "bobesponja@email.com",
+                    "cpf": "123.456.789.00",
+                    "dataNascimento": "1970-01-01",
+                    "senha": "123456" 
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usuário criado com sucesso",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/user-response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos!"
+          },
+          "401": {
+            "description": "Token inválido ou não informado."
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "tags": ["Usuários"],
+        "security": [{ "bearerAuth": []}],
+        "summary": "Atualiza um usuário existente",
+        "description": "Esta rota é responsável por atualizar um usuário cadastrado no sistema.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do treinador atualizado",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/user-request" },
+              "examples": {
+                "user-sucess": {
+                  "value": {
+                    "nome": "Bob Esponja Atualizado",
+                    "email": "bobesponja@email.com",
+                    "cpf": "123.456.789.00",
+                    "dataNascimento": "1970-01-01",
+                    "senha": "12345678" 
+                  }
+                }
+              }
+            }
+          }         
+        },
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/user-response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos!"
+          },
+          "401": {
+            "description": "Token inválido ou não informado."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "session-request": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "senha": { "type": "string"}
+        }
+      },
+      "session-response": {
+        "type": "object",
+        "properties": {
+          "usuario": {"type": "object"},
+          "token": {"type": "string"}
+        }
+      },
+      "user-response": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+		      "nome": { "type": "string" },
+		      "email": { "type": "string" }
+        }
+      },
+      "user-request": {
+        "type": "object",
+        "properties": {
+          "nome": { "type": "string"},
+          "email":  { "type": "string"},
+          "cpf":  { "type": "string"},
+          "dataNascimento":  { "type": "string"},
+          "senha": { "type": "string"} 
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
 }
