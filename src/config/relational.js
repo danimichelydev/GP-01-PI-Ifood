@@ -3,24 +3,27 @@ import EnderecoModel from '../../src/app/models/EnderecoModel.js';
 import QuartosModel from '../app/models/ModelQuartos.js';
 
 //as relacoes ficaram separadas igual a do pokedex
-function relacoes () {
+function relacoes() {
     MotelModel.hasOne(EnderecoModel, {
-        foreignKey: "idMotel",
-        as: "endereco",
-        onDelete: "CASCADE"
+        foreignKey: 'id_motel',
+        as: 'endereco',
+        onDelete: 'CASCADE',
     });
-    
-    EnderecoModel.belongsTo(MotelModel);
+
+    EnderecoModel.belongsTo(MotelModel, {
+        foreignKey: 'id_motel',
+        as: 'moteis',
+    });
 
     MotelModel.hasMany(QuartosModel, {
-        foreignKey: "idMotel",
-        as: "quarto",
-        onDelete: "CASCADE"
+        foreignKey: 'id_motel',
+        as: 'quarto',
+        onDelete: 'CASCADE',
     });
 
-    QuartosModel.belongsTo(MotelModel);
+    QuartosModel.belongsTo(MotelModel, {
+        foreignKey: 'id_motel',
+    });
 }
 
 export default { relacoes };
-
-

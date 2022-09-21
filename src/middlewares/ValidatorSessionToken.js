@@ -6,9 +6,9 @@ export default async function validateSessionToken(request, response, next) {
   if (!token) {
     return response.status(401).json({ error: "Precisa ser feito o login" });
   }
-  console.log(token)
+  
   const getValidToken = String(token).split('#bearer ')[1]
-  console.log(getValidToken)
+  
   try {
     const validateToken = jwt.verify(
       getValidToken,

@@ -1,4 +1,4 @@
-import ListMotelService from "../../services/Motel/ListMotelService";
+import ListMotelService from '../../services/Motel/ListMotelService';
 
 export default class ListMotelController {
     constructor() {
@@ -6,15 +6,20 @@ export default class ListMotelController {
     }
 
     async listarMoteis(request, response) {
-        const moteis = await this.service.listAll()
-
+        const moteis = await this.service.listAll();
         return response.json(moteis);
     }
 
     async listaUmMotel(request, response) {
         const { nome } = request.query;
+
         const umMotel = await this.service.listOne(nome);
 
         return response.json(umMotel);
+    }
+    async listaMoteisPorBairro(request, response) {
+        const { nome } = request.query;
+        const moteis = await this.service.listAllByBairro(nome);
+        return response.json(moteis);
     }
 }
