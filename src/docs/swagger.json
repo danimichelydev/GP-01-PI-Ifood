@@ -24,8 +24,8 @@
               "examples": {
                 "session-sucess": {
                   "value": {
-                    "email": "email@example.com",
-                    "senha": "123456"
+                    "email": "michely@gmail.com",
+                    "senha": "000000"
                   }
                 }
               }
@@ -58,9 +58,10 @@
       }
     },
     "/users": {
+      "_comment": "ESTA ROTA NÃO ESTÁ LISTANDO OS USUÁRIOS",
       "get": {
         "tags": ["Usuários"],
-        "security": [{ "bearerAuth": [] }],
+        "security": [{ "bearerAuth": []}],
         "summary": "Lista todos os usuários",
         "description": "Esta rota é responsável por listar todos os usuários cadastrados no sistema.",
         "responses": {
@@ -120,7 +121,9 @@
         }
       }
     },
+
     "/users/{id}": {
+      "_comment": "ESTA ROTA NÃO ESTÁ ATUALIZANDO O USUÁRIO",
       "put": {
         "tags": ["Usuários"],
         "security": [{ "bearerAuth": []}],
@@ -130,7 +133,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "ID do treinador atualizado",
+            "description": "ID do usuario atualizado",
             "required": true
           }
         ],
@@ -171,9 +174,179 @@
             "description": "Token inválido ou não informado."
           }
         }
+      },
+      "delete": {
+        "tags": ["Usuários"],
+        "security": [{"bearerAuth": []}],
+        "summary": "Deleta um usuário.",
+        "description":"Esta rota é responsável por deletar um usuário cadastrado.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do usuário que será deletado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário deletado com sucesso!"
+          },
+          "400": {
+            "description": "Dados inválidos!"
+          },
+          "401": {
+            "description": "Token inválido ou não informado."
+          }
+        }
+      }
+    },
+
+    "/moteis": {
+      "get": {
+        "tags": ["Moteis"],
+        "summary": "Lista todos os moteis",
+        "description": "Esta rota é responsável por listar todos os moteis cadastrados no sistema.",
+        "responses": {
+          "200": {
+            "description": "Listar os moteis cadastrados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/moteis-response" }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "_comment": "ESTA ROTA NÃO ESTÁ CRIANDO UM NOVO MOTEL",
+      "post": {
+        "tags": ["Moteis"],
+        "security": [{ "bearerAuth": []}],
+        "summary": "Cadastra um novo motel",
+        "description": "Esta rota é responsável por cadastrar um novo motel.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref" : "#/components/schemas/user-request"},
+              "examples": {
+                "user-sucess": {
+                  "value": {
+                    "nome":"Sonhos Motel",
+                     "cnpj": "01.001.001/0001-01",
+                    "endereco": {
+                      "rua":"Rua dos Sonhos",
+                        "numero": "123",
+                        "bairro": "Bairro Novo",
+                        "cidade": "Fortaleza",
+                        "cep": "01.001-001"	
+                    }
+                  }  
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Motel criado com sucesso",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/moteis-response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos!"
+          },
+          "401": {
+            "description": "Token inválido ou não informado."
+          }
+        }
+      }
+    },
+
+
+    "/moteis/search/{nome}": {
+      "_comment": "ESTA ROTA NÃO ESTÁ LISTANDO MOTEL POR BAIRRO",
+      "get": {
+        "tags": ["Moteis"],
+        "summary": "Busca um motel por bairro.",
+        "description": "Esta rota é responsável por buscar um motel no sistema.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/moteis-response"},
+              "examples": {
+                "nome": "Sonhos"
+              }
+            }
+          }
+        }, 
+        "responses": {
+          "200": {
+            "description": "Motel encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "$ref": "#/components/schemas/moteis-response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Não encontramos moteis nesse bairro."
+          }
+        }
+      }
+    },
+
+    
+    "/moteis/{id}": {
+      "delete": {
+        "tags": ["Moteis"],
+        "security": [{"bearerAuth": []}],
+        "summary": "Deleta um motel.",
+        "description":"Esta rota é responsável por deletar um motel cadastrado.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do motel que será deletado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Motel deletado com sucesso!"
+          },
+          "400": {
+            "description": "Dados inválidos!"
+          },
+          "401": {
+            "description": "Token inválido ou não informado."
+          }
+        }
+      },
+
+      "put": {
+        "tags": ["Moteis"]
+        
       }
     }
   },
+
+
+
+
+
   "components": {
     "schemas": {
       "session-request": {
@@ -206,6 +379,14 @@
           "cpf":  { "type": "string"},
           "dataNascimento":  { "type": "string"},
           "senha": { "type": "string"} 
+        }
+      },
+      "moteis-response": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "nome": { "type": "string" },
+          "cnpj": { "type": "string" }
         }
       }
     },
