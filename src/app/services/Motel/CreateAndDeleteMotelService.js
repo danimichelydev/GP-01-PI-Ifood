@@ -14,10 +14,11 @@ export default class CreateAndDeleteMotelService {
                 return { erro: 'Motel já existe!' };
             }
             let novoMotel = await MotelModel.create(motel);
-            endereco.idMotel = novoMotel.id;
+            endereco.id_motel = novoMotel.id;
             await EnderecoModel.create(endereco);
             return ([novoMotel, endereco]);
         } catch (error) {
+            console.log(error)
             return { erro: error.message };
         }
     }
