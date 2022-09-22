@@ -27,7 +27,8 @@ export default class ListMotelService {
 
             return umMotel;
         } catch (error) {
-            return { erro: error.message };
+            console.log(error);
+            return { erro: 'Motel não encontrado.' };
         }
     }
 
@@ -47,7 +48,7 @@ export default class ListMotelService {
             return moteis;
         } catch (error) {
             console.log(error);
-            return { erro: 'não há motéis cadastrados nesse bairro' };
+            return { erro: 'Não há motéis cadastrados nesse bairro.' };
         }
     }
 }
