@@ -308,7 +308,7 @@
       }
     },
 
-    
+
     "/moteis/{id}": {
       "delete": {
         "tags": ["Moteis"],
@@ -337,8 +337,7 @@
       },
 
       "put": {
-        "tags": ["Moteis"]
-        
+        "tags": ["Moteis"] 
       }
     }
   },
