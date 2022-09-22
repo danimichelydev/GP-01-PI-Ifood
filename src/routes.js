@@ -62,14 +62,14 @@ routes.delete('/moteis/:id', (req, res) =>
     createAndDeleteMotelController.deletaMotel(req, res)
 );
 
-routes.get('/motel/:idMotel/quartos', (req, res) =>
+routes.get('/motel/:id_motel/quartos', (req, res) =>
     quartoController.listarQuartos(req, res)
 );
 routes.post('/motel/quarto', (req, res) =>
     quartoController.addQuarto(req, res)
 );
 routes.get('/motel/quartos/:id', (req, res) =>
-    quartoController.listaUmQuarto(res, req)
+    quartoController.listaUmQuarto(req, res)
 );
 
 export { routes as default };

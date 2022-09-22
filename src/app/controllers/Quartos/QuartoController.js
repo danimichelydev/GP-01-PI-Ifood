@@ -1,69 +1,44 @@
-import QuartoRepository from '../../models/ModelQuartos.js';
-
+import { response } from "express";
+import QuartoService from "../../services/Quarto/QuartoService";
 export default class QuartoController {
-    async listarQuartos(req, res) {
-        const { idMotel } = req.params;
-        try {
-            const todosQuartos = await QuartoRepository.findAll({
-                where: { id_motel: Number(idMotel) },
-            });
-            return res.status(200).json(todosQuartos);
-        } catch (error) {
-            console.log(error);
-            return res.status(400).json(error.message);
-        }
-    }
+  constructor() {
+    this.service = new QuartoService();
+  }
 
-    // listar um quarto
-    async listaUmQuarto(req, res) {
-        const { id } = req.params;
-        try {
-            const umQuarto = await MotelRepository.findOne({
-                where: { id: Number(id) },
-            }).then((umQuarto) => res.json(umQuarto));
-        } catch (error) {
-            return res.status(400).json({ messagem: 'Quarto não disponível' });
-        }
-    }
+  async listarQuartos(req, res) {
+    const { id_motel } = req.params;
+    const todosQuartos = await this.service.listAll(id_motel)
+    return res.json(todosQuartos);
+  }
 
-    // adiciona um quarto
-    async addQuarto(req, res) {
-        try {
-            let dadosQuarto = req.body;
-            let quarto = await QuartoRepository.create(dadosQuarto);
-            res.status(200).json(quarto);
-        } catch (error) {
-            return res.status(400).json(error.message);
-        }
-    }
+  async listaUmQuarto(req, res) {
+    console.log(req.params)
+    const { id } = req.params;
+    const umQuarto = await this.service.listOne(id);
+    return res.json(umQuarto);
+  }
 
-    // atualiza um quarto
-    async atualizaQuarto(req, res) {
-        const { id } = req.params;
-        const novasInfos = req.body;
-        try {
-            await QuartoRepository.update(novasInfos, {
-                where: { id: Number(id) },
-            });
-            const quartoAtualizado = await QuartoRepository.findOne({
-                where: { id: Number(id) },
-            });
-            return res.status(200).json(quartoAtualizado);
-        } catch (error) {
-            return res.status(400).json(error.message);
-        }
-    }
+  async addQuarto(req, res) {
+    let dadosQuarto = req.body;
+    let quarto = await this.service.create(dadosQuarto)
+    return res.json(quarto);
+  }
 
-    // deleta um quarto
-    async deletaQuarto(req, res) {
-        const { id } = req.params;
-        try {
-            await QuartoRepository.destroy({ where: { id: Number(id) } });
-            return res
-                .status(200)
-                .json({ messagem: 'Quarto deletado com sucesso!' });
-        } catch (error) {
-            return res.status(400).json(error.message);
-        }
+  async atualizaQuarto(req, res) {
+    const { id } = req.params;
+    const novasInfos = req.body;
+    const quartoAtualizado = await this.service.update(id, novasInfos);
+    return res.json(quartoAtualizado);
+  }
+
+  async deletaQuarto(req, res) {
+    const { id } = req.params;
+    const resultado = await this.service.delete(id);
+    if (resultado.sucess == false) {
+      return res.status(400).json(resultado);
     }
-}
+    return response.status(200).json(resultado);
+  }
+};
+
+

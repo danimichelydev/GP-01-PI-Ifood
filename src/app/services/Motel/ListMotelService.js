@@ -6,15 +6,20 @@ export default class ListMotelService {
 
     async listAll() {
         try {
-            const moteis = await MotelModel.findAll();
-            return moteis;
+            const moteis = await MotelModel.findAll( {
+                include: {
+                    model: EnderecoModel,
+                    attributes: ['bairro'],
+                    as: 'endereco',
+                }, 
+            });
+            return (moteis);
         } catch (error) {
             return { erro: error.message };
         }
     }
 
     async listOne(nomeMotel) {
-        console.log(nomeMotel);
         try {
             const umMotel = await MotelModel.findOne({
                 where: { nome: nomeMotel },

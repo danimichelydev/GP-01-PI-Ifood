@@ -18,9 +18,9 @@ export default class CreateAndDeleteMotelController {
     async deletaMotel(request, response) {
         const { id } = request.params;
         const resultado = await this.service.delete(id);
-        if (resultado.sucess==false) {
+        if (resultado.sucess == false) {
             return response.status(400).json(resultado);
         }
         return response.status(200).json(resultado);
     }
-}
+};

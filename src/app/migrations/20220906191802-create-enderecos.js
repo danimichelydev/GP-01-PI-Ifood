@@ -28,7 +28,6 @@ module.exports = {
                 type: Sequelize.STRING(20),
                 allowNull: false,
             },
-            // para relacoes colocar tipo, on delete(pra deleter quando a relação for deletada)
             id_motel: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
