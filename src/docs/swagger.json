@@ -57,6 +57,9 @@
         }
       }
     },
+
+
+
     "/users": {
       "_comment": "ESTA ROTA NÃO ESTÁ LISTANDO OS USUÁRIOS",
       "get": {
@@ -202,6 +205,9 @@
       }
     },
 
+
+
+
     "/moteis": {
       "get": {
         "tags": ["Moteis"],
@@ -273,7 +279,7 @@
     },
 
 
-    "/moteis/search/{nome}": {
+    "/moteis/bairro/{nome}": {
       "_comment": "ESTA ROTA NÃO ESTÁ LISTANDO MOTEL POR BAIRRO",
       "get": {
         "tags": ["Moteis"],
@@ -310,6 +316,65 @@
 
 
     "/moteis/{id}": {
+      "put": {
+        "tags": ["Moteis"],
+        "security": [{ "bearerAuth": []}],
+        "summary": "Atualiza um motel existente",
+        "description": "Esta rota é responsável por atualizar um motel cadastrado no sistema.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do motel atualizado",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/moteis-request" },
+              "examples": {
+                "user-sucess": {
+                  "value": {
+                    "nome":"Nome do Motel",
+                    "cnpj": "00.000.000/0001-00",
+                    "endereco": [{
+                      "rua":"Nome da Rua",
+                      "numero": "000",
+                      "bairro": "Nome do Bairro",
+                      "cidade": "fortaleza",
+                      "cep": "00.000-000"
+                  }]
+                }
+              }
+            }
+          }         
+        },
+        "responses": {
+          "200": {
+            "description": "Motel atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/user-response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos!"
+          },
+          "401": {
+            "description": "Token inválido ou não informado."
+            }
+          }
+        }
+      },
+
+
+
+
       "delete": {
         "tags": ["Moteis"],
         "security": [{"bearerAuth": []}],
@@ -334,12 +399,59 @@
             "description": "Token inválido ou não informado."
           }
         }
-      },
+      }      
+    },
 
-      "put": {
-        "tags": ["Moteis"] 
+
+    "/moteis/quarto": {
+      "post": {
+        "tags": ["Quartos"],
+        "summary": "Cadastra um novo quarto.",
+        "description": "Esta rota é responsável por cadastrar um novo quarto num motel.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref" : "#/components/schemas/quarto-request"},
+              "examples": {
+                "user-sucess": {
+                  "value": {
+                    "nome": "Nome do quarto",
+                    "valor_quarto": "450.00",
+                    "acessorios_quarto": "s",
+                    "status": "disponivel",
+                    "id_motel": "1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Quarto criado com sucesso",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/quarto-response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos!"
+          },
+          "401": {
+            "description": "Token inválido ou não informado."
+          }
+        }
       }
     }
+
+
+
+
+    
   },
 
 
@@ -362,14 +474,8 @@
           "token": {"type": "string"}
         }
       },
-      "user-response": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "string" },
-		      "nome": { "type": "string" },
-		      "email": { "type": "string" }
-        }
-      },
+
+
       "user-request": {
         "type": "object",
         "properties": {
@@ -380,6 +486,16 @@
           "senha": { "type": "string"} 
         }
       },
+      "user-response": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+		      "nome": { "type": "string" },
+		      "email": { "type": "string" }
+        }
+      },
+
+
       "moteis-response": {
         "type": "object",
         "properties": {
@@ -387,7 +503,31 @@
           "nome": { "type": "string" },
           "cnpj": { "type": "string" }
         }
+      },
+
+      "moteis-request": {
+
+
+        
+      },
+
+
+      "quarto-request": {
+        "nome": { "type": "string" },
+        "valor_quarto": { "type": "number" },
+        "acessorios_quarto":  { "type": "string" },
+        "status":  { "type": "string" },
+        "id_motel": { "type": "string" }
+      },
+      "quarto-response": {
+        "id": { "type": "string" },
+        "nome": { "type": "string" },
+        "valor_quarto": { "type": "string" },
+        "acessorios_quarto": { "type": "string" },
+        "status_quarto": { "type": "string" },
+        "id_motel": { "type": "string" }
       }
+      
     },
     "securitySchemes": {
       "bearerAuth": {
