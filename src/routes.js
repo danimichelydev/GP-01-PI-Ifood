@@ -11,6 +11,9 @@ import CreateAndDeleteMotelController from './app/controllers/Motel/CreateAndDel
 import UpdateMotelController from './app/controllers/Motel/UpdateMotelController.js';
 import ListMotelController from './app/controllers/Motel/ListMotelController.js';
 import validateSessionToken from './middlewares/ValidatorSessionToken.js';
+import CreateAndDeleteReservaController from './app/controllers/Reserva/CreateAndDeleteReservaController.js';
+import ListReservaController from './app/controllers/Reserva/ListReservaController.js';
+import UpdateReservaController from './app/controllers/Reserva/UpdateReservaController.js';
 const routes = new Router();
 
 import swagger from 'swagger-ui-express';
@@ -51,6 +54,9 @@ const createAndDeleteMotelController = new CreateAndDeleteMotelController();
 const updateMotelController = new UpdateMotelController();
 const listMotelController = new ListMotelController();
 const quartoController = new QuartoController();
+const createAndDeleteReservaController = new CreateAndDeleteReservaController();
+const listReservaController = new ListReservaController();
+const updateReservaController = new UpdateReservaController();
 
 routes.post('/moteis', validatorMotel, (req, res) =>
     createAndDeleteMotelController.addMotel(req, res)
@@ -71,5 +77,29 @@ routes.post('/motel/quarto', (req, res) =>
 routes.get('/motel/quartos/:id', (req, res) =>
     quartoController.listaUmQuarto(req, res)
 );
+
+routes.post('/reserva', (req, res) =>
+    createAndDeleteReservaController.addReserva(req, res)
+);
+routes.delete('/reserva/:id', (req, res) =>
+    createAndDeleteReservaController.deletaReserva(req, res)
+);
+routes.get('/reserva/user/:id', (req, res) =>
+    listReservaController.listByUser(req, res)
+);
+
+routes.get('/reserva/quarto/:id', (req, res) =>
+    listReservaController.listByRoom(req, res)
+);
+routes.get('/reserva/', (req, res) =>
+    listReservaController.list(req, res)
+);
+routes.get('/reserva/motel/:id', (req, res) =>
+    listReservaController.listByMotel(req, res)
+);
+routes.put('/reserva/:id', (req, res) =>
+    updateReservaController.updateReserva(req, res)
+);
+
 
 export { routes as default };
