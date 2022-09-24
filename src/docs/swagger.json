@@ -12,7 +12,9 @@
     }
   ],
   "paths": {
+
     "/session": {
+      "_comment": "Rotas da SESSION de autenticação - Linha 16",
       "post": {
         "tags": ["Authentication"],
         "summary": "Realizar login na API",
@@ -61,7 +63,7 @@
 
 
     "/users": {
-      "_comment": "ESTA ROTA NÃO ESTÁ LISTANDO OS USUÁRIOS",
+      "_comment": "Rotas de USUÁRIOS - Linha 66",
       "get": {
         "tags": ["Usuários"],
         "security": [{ "bearerAuth": []}],
@@ -126,7 +128,6 @@
     },
 
     "/users/{id}": {
-      "_comment": "ESTA ROTA NÃO ESTÁ ATUALIZANDO O USUÁRIO",
       "put": {
         "tags": ["Usuários"],
         "security": [{ "bearerAuth": []}],
@@ -204,11 +205,12 @@
         }
       }
     },
+    
 
 
-
-
+    
     "/moteis": {
+      "_comment": "Rotas de MOTEIS - Linha 213",
       "get": {
         "tags": ["Moteis"],
         "summary": "Lista todos os moteis",
@@ -228,7 +230,7 @@
         }
       },
 
-      "_comment": "ESTA ROTA NÃO ESTÁ CRIANDO UM NOVO MOTEL",
+  
       "post": {
         "tags": ["Moteis"],
         "security": [{ "bearerAuth": []}],
@@ -237,7 +239,7 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref" : "#/components/schemas/user-request"},
+              "schema": { "$ref" : "#/components/schemas/moteis-request"},
               "examples": {
                 "user-sucess": {
                   "value": {
@@ -278,23 +280,19 @@
       }
     },
 
-
-    "/moteis/bairro/{nome}": {
-      "_comment": "ESTA ROTA NÃO ESTÁ LISTANDO MOTEL POR BAIRRO",
+    "/moteis/bairro": {
       "get": {
         "tags": ["Moteis"],
-        "summary": "Busca um motel por bairro.",
-        "description": "Esta rota é responsável por buscar um motel no sistema.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/moteis-response"},
-              "examples": {
-                "nome": "Sonhos"
-              }
-            }
+        "summary": "Busca moteis por bairro.",
+        "description": "Esta rota é responsável por buscar moteis por bairro.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nome",
+            "description": "Nome do bairro",
+            "required": true
           }
-        }, 
+        ],
         "responses": {
           "200": {
             "description": "Motel encontrado",
@@ -313,7 +311,6 @@
         }
       }
     },
-
 
     "/moteis/{id}": {
       "put": {
@@ -336,19 +333,20 @@
               "examples": {
                 "user-sucess": {
                   "value": {
-                    "nome":"Nome do Motel",
-                    "cnpj": "00.000.000/0001-00",
-                    "endereco": [{
-                      "rua":"Nome da Rua",
-                      "numero": "000",
-                      "bairro": "Nome do Bairro",
+                    "nome":"ama",
+                    "cnpj": "22.842.844/0001-37",
+                    "endereco": {
+                      "rua":"rua de acordar",
+                      "numero": "12",
+                      "bairro": "aldeota",
                       "cidade": "fortaleza",
-                      "cep": "00.000-000"
-                  }]
+                      "cep": "60.841-670"	
+                    }
+                  }
                 }
               }
             }
-          }         
+          }      
         },
         "responses": {
           "200": {
@@ -357,7 +355,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/user-response"
+                  "$ref": "#/components/schemas/moteis-request"
                 }
               }
             }
@@ -367,7 +365,6 @@
           },
           "401": {
             "description": "Token inválido ou não informado."
-            }
           }
         }
       },
@@ -403,10 +400,13 @@
     },
 
 
+   
+
     "/moteis/quarto": {
       "post": {
         "tags": ["Quartos"],
-        "summary": "Cadastra um novo quarto.",
+        "security": [{ "bearerAuth": []}],
+        "summary": "Cadastra um novo quarto num motel.",
         "description": "Esta rota é responsável por cadastrar um novo quarto num motel.",
         "requestBody": {
           "content": {
@@ -446,15 +446,71 @@
           }
         }
       }
-    }
-
-
-
-
+    },   
     
+    
+    "/motel/{id}/quartos": {
+      "get": {
+        "tags": ["Quartos"],
+        "security": [{ "bearerAuth": []}],
+        "summary": "Lista todos os quartos de um motel específico",
+        "description": "Esta rota é responsável por listar todos os quartos de um motel específico.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do motel que você quer ver os quartos.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listar os quartos de um motel.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/quarto-response" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/motel/quartos/{id}": {
+      "get": {
+        "tags": ["Quartos"],
+        "security": [{ "bearerAuth": []}],
+        "summary": "Buscar por um quarto qualquer pelo ID",
+        "description": "Esta rota é responsável por buscar um quarto qualquer em todos os moteis.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do quarto que você quer buscar.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Buscar por um quarto pelo ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/quarto-response" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
 
-
+  
 
 
 
@@ -506,10 +562,17 @@
       },
 
       "moteis-request": {
-
-
-        
+        "nome": { "type": "string" },
+          "cnpj": { "type": "string" },
+        "endereco": [{
+          "rua": { "type": "string" },
+          "numero": { "type": "string" },
+          "bairro": { "type": "string" },
+          "cidade": { "type": "string" },
+          "cep": { "type": "string" }	
+        }]
       },
+
 
 
       "quarto-request": {
