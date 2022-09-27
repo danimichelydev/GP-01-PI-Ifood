@@ -20,7 +20,7 @@ export default class ListReservaService {
         );
         reserva.forEach((reserva) => {
             let data= new Date(reserva.data_reserva);
-            let dataFormatada = data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
+            let dataFormatada = (data.getDate()+1) + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
             reserva.data_reserva = dataFormatada;
         });
         return reserva;
@@ -51,7 +51,7 @@ export default class ListReservaService {
         );
         reserva.forEach((reserva) => {
             let data= new Date(reserva.data_reserva);
-            let dataFormatada = data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
+            let dataFormatada = (data.getDate()+1) + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
             reserva.data_reserva = dataFormatada;
         });
 
