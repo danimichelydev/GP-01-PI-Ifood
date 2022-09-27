@@ -14,6 +14,8 @@ import validateSessionToken from './middlewares/ValidatorSessionToken.js';
 import CreateAndDeleteReservaController from './app/controllers/Reserva/CreateAndDeleteReservaController.js';
 import ListReservaController from './app/controllers/Reserva/ListReservaController.js';
 import UpdateReservaController from './app/controllers/Reserva/UpdateReservaController.js';
+import validatorReserva from './middlewares/ValidatorReserva.js';
+import validatorQuarto from './middlewares/ValidatorQuarto.js';
 const routes = new Router();
 
 import swagger from 'swagger-ui-express';
@@ -71,14 +73,14 @@ routes.delete('/moteis/:id', (req, res) =>
 routes.get('/motel/:id_motel/quartos', (req, res) =>
     quartoController.listarQuartos(req, res)
 );
-routes.post('/motel/quarto', (req, res) =>
+routes.post('/motel/quarto',validatorQuarto, (req, res) =>
     quartoController.addQuarto(req, res)
 );
 routes.get('/motel/quartos/:id', (req, res) =>
     quartoController.listaUmQuarto(req, res)
 );
 
-routes.post('/reserva', (req, res) =>
+routes.post('/reserva',validatorReserva, (req, res) =>
     createAndDeleteReservaController.addReserva(req, res)
 );
 routes.delete('/reserva/:id', (req, res) =>

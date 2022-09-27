@@ -8,9 +8,17 @@ export default class UpdateReservaService {
                     id,
                 }
             });
-
             if (!reserva) {
                 return { sucess: false, message: 'Reserva não encontrada' };
+            }
+            const verificaStatus = await ReservaModel.findOne({
+                where: {
+                    id,
+                    status_reserva: 'Cancelada'||'Finalizada'
+                }
+            });
+            if (verificaStatus) {
+                return { sucess: false, message: 'Não é possível alterar uma reserva Cancelada ou Finalizada' };
             }
 
             await reserva.update(dadosReserva);
