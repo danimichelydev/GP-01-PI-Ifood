@@ -470,7 +470,7 @@
               "application/json": {
                 "schema": {
                   "type": "array",
-                  "items": { "$ref": "#/components/schemas/quarto-response" }
+                  "items": { "$ref": "#/components/schemas/quarto-request" }
                 }
               }
             }
@@ -479,7 +479,7 @@
       }
     },
 
-    "/motel/quarto/{id}": {
+    "/motel/quartos/{id}": {
       "get": {
         "tags": ["Quartos"],
         "security": [{ "bearerAuth": []}],
