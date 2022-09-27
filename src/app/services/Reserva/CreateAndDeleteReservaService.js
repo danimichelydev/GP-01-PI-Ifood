@@ -3,12 +3,21 @@ import ReservaModel from '../../models/ReservaModel';
 export default class CreateAndDeleteReservaService {
     async create(dadosReserva) {
         try {
-            const QuartoExiste = await ReservaModel.findOne({
-                where: { id_quarto: dadosReserva.id_quarto },
-            });
-            const UsuarioExiste = await ReservaModel.findOne({
-                where: { id_usuario: dadosReserva.id_usuario },
-            });
+            const UsuarioExiste = await ReservaModel.sequelize.query(
+                "SELECT id FROM Usuarios WHERE id = :id",
+                {
+                    replacements: { id: dadosReserva.id_usuario },
+                    type: ReservaModel.sequelize.QueryTypes.SELECT,
+                }
+            );
+            const QuartoExiste = await ReservaModel.sequelize.query(
+                "SELECT id FROM Quartos WHERE id = :id",
+                {
+                    replacements: { id: dadosReserva.id_quarto },
+                    type: ReservaModel.sequelize.QueryTypes.SELECT,
+                }
+            );
+           
             const reservaExiste = await ReservaModel.findOne({
                 where: {
                     id_quarto: dadosReserva.id_quarto,
@@ -66,8 +75,11 @@ export default class CreateAndDeleteReservaService {
             if (verificaHoras(dadosReserva.hora_reserva) == false) {
                 return { erro: 'Hora inválida' };
             }
-            if (!QuartoExiste || !UsuarioExiste) {
-                return { erro: 'Quarto ou Usuario não existe' };
+            if (UsuarioExiste.length == 0) {
+                return { erro: 'Usuário não existe' };
+            }
+            if (QuartoExiste.length == 0) {
+                return { erro: 'Quarto não existe' };
             }
             if (verificaMinutos(dadosReserva.hora_reserva) == false) {
                 return { erro: 'Não é possível reservar com minutos diferentes de 00' };
