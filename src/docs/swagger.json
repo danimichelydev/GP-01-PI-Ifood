@@ -479,7 +479,7 @@
       }
     },
 
-    "/motel/quartos/{id}": {
+    "/motel/quarto/{id}": {
       "get": {
         "tags": ["Quartos"],
         "security": [{ "bearerAuth": []}],
