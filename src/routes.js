@@ -79,7 +79,7 @@ routes.get('/motel/:id_motel/quartos', (req, res) =>
 routes.post('/motel/quarto',validatorQuarto, (req, res) =>
     quartoController.addQuarto(req, res)
 );
-routes.get('/motel/quartos/:id', (req, res) =>
+routes.get('/motel/quarto/:id', (req, res) =>
     quartoController.listaUmQuarto(req, res)
 );
 
