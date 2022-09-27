@@ -25,6 +25,7 @@ const createAndDeleteUserController = new CreateAndDeleteUserController();
 const updateUserController = new UpdateUserController();
 const listUserController = new ListUserController();
 
+
 routes.use('/docs', swagger.serve, swagger.setup(swaggerJson));
 
 routes.post('/session', (req, res) => SessionController.create(req, res));
@@ -37,6 +38,8 @@ routes.get('/moteis', (req, res) => listMotelController.listarMoteis(req, res));
 routes.get('/moteis/bairro', (req, res) =>
     listMotelController.listaMoteisPorBairro(req, res)
 );
+
+
 routes.post('/users', validatorUsers, (req, res) =>
     createAndDeleteUserController.addUsuario(req, res)
 );
@@ -80,7 +83,11 @@ routes.get('/motel/quartos/:id', (req, res) =>
     quartoController.listaUmQuarto(req, res)
 );
 
+routes.delete('/motel/quarto/:id', (req, res) => 
+    quartoController.deletaQuarto(req, res)
+)
 routes.post('/reserva',validatorReserva, (req, res) =>
+
     createAndDeleteReservaController.addReserva(req, res)
 );
 routes.delete('/reserva/:id', (req, res) =>

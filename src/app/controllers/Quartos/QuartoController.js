@@ -37,7 +37,7 @@ export default class QuartoController {
     if (resultado.sucess == false) {
       return res.status(400).json(resultado);
     }
-    return response.status(200).json(resultado);
+    return res.status(200).json(resultado);
   }
 };
 
